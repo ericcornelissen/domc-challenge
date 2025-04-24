@@ -1,0 +1,7 @@
+{
+  "private": true,
+	"type": "module",
+  "devDependencies": {
+    "javascript-obfuscator": "4.1.1"
+  }
+}

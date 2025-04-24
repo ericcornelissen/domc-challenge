@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<link href="./styles.css" rel="stylesheet" type="text/css">
+	<script src="./shared.js"></script>
+</head>
+
+<body>
+	<noscript>
+		<b>These challenges require JavaScript to be enabled to complete.</b>
+	</noscript>
+
+	<div>
+		<h1>
+			DOM Clobbering Challenge #4
+		</h1>
+		<p>
+			<b>Your goal:</b>
+			Clobber <code>$form.domc</code>, again
+		</p>
+		<p>
+			In the previous challenge you clobbered a <code>&lt;form&gt;</code> by
+			inserting an element inside it. In this challenge you can insert an
+			element <i>after</i> the <code>&lt;form&gt;</code>. Recall that to clobber
+			a <code>&lt;form&gt;</code> the clobbering element needs to be
+			<i>owned</i> by it.
+		</p>
+		<p>
+			If you need some help, look at the
+			<a
+				target="_blank"
+				href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input"
+			>
+				attributes list
+			</a>
+			for <code>&lt;input&gt;</code> elements.
+		</p>
+	</div>
+
+	<div id="solved"></div>
+
+	<hr>
+
+	<div>
+		<form>
+			<label for="input">Your input:</label>
+			<br>
+			<textarea id="input" name="input"></textarea>
+			<br>
+			<input type="submit" value="Submit">
+		</form>
+
+		<pre id="preview"></pre>
+	</div>
+
+	<form id="login" class="hidden"></form>
+	<div id="container" class="hidden"></div>
+
+	<script src="./short-sheep.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,4 @@
+1. <div id=domc><div>
+2. <img name=domc>
+3. <input name=domc>
+4. <input form=login name=domc>
