@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<link href="./styles.css" rel="stylesheet" type="text/css">
+	<script src="./shared.js"></script>
+</head>
+
+<body>
+	<noscript>
+		<b>These challenges require JavaScript to be enabled to complete.</b>
+	</noscript>
+
+	<div>
+		<h1>
+			DOM Clobbering Challenge #2
+		</h1>
+		<p>
+			<b>Your goal:</b>
+			Clobber <code>document.domc</code>
+		</p>
+		<p>
+			Secondly, you use DOM Clobbering to add and override properties of the
+			<code>document</code> object (except <code>url</code>), which is the goal
+			of this challenge. The <code>document</code> object can only be clobbered
+			by certain elements. To clobber, you need to be able to insert a specific
+			element into the DOM with the correct <code>name</code> attribute. The
+			element must be one of
+			<code>&lt;embed&gt;</code>,
+			<code>&lt;form&gt;</code>,
+			<code>&lt;iframe&gt;</code>,
+			<code>&lt;img&gt;</code>, or
+			<code>&lt;object&gt;</code>.
+		</p>
+	</div>
+
+	<div id="solved"></div>
+
+	<hr>
+
+	<div>
+		<form>
+			<label for="input">Your input:</label>
+			<br>
+			<textarea id="input" name="input"></textarea>
+			<br>
+			<input type="submit" value="Submit">
+		</form>
+
+		<pre id="preview"></pre>
+	</div>
+
+	<div id="container" class="hidden"></div>
+	<script src="./production-neighbour.js"></script>
+</body>
+
+</html>

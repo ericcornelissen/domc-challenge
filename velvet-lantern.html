@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<link href="./styles.css" rel="stylesheet" type="text/css">
+	<script src="./shared.js"></script>
+</head>
+
+<body>
+	<noscript>
+		<b>These challenges require JavaScript to be enabled to complete.</b>
+	</noscript>
+
+	<div>
+		<h1>
+			DOM Clobbering Challenge #3
+		</h1>
+		<p>
+			<b>Your goal:</b>
+			Clobber <code>$form.domc</code>
+		</p>
+		<p>
+			Lastly, you use DOM Clobbering to add and override properties of <code>
+			&lt;form&gt;</code> nodes, which is the goal of this challenge. Like
+			<code>document</code>, <code>&lt;form&gt;</code> nodes can only be
+			clobbered by certain elements using the <code>name</code> attribute. On
+			top of that the element that are "owned" by the form (usually children).
+			The element must be one of
+			<code>&lt;button&gt;</code>,
+			<code>&lt;fieldset&gt;</code>,
+			<code>&lt;img&gt;</code>,
+			<code>&lt;input&gt;</code>,
+			<code>&lt;object&gt;</code>,
+			<code>&lt;output&gt;</code>,
+			<code>&lt;select&gt;</code>, or
+			<code>&lt;textarea&gt;</code>.
+		</p>
+	</div>
+
+	<div id="solved"></div>
+
+	<hr>
+
+	<div>
+		<form>
+			<label for="input">Your input:</label>
+			<br>
+			<textarea id="input" name="input"></textarea>
+			<br>
+			<input type="submit" value="Submit">
+		</form>
+
+		<pre id="preview"></pre>
+	</div>
+
+	<form id="container" class="hidden"></form>
+
+	<script src="./velvet-lantern.js"></script>
+</body>
+
+</html>
