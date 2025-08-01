@@ -12,15 +12,36 @@
 	</noscript>
 
 	<div>
+		<p>
+			<a href="./index.html">home</a>
+			-
+			<a href="./short-sheep.html">previous</a>
+		</p>
 		<h1>
 			DOM Clobbering Challenge #5
 		</h1>
 		<p>
 			<b>Your goal:</b>
-			[TODO]
+			Get the site to load a new script named <code>malicious.js</code>.
 		</p>
 		<p>
-			[TODO]
+			One JavaScript pattern that is vulnerable to DOM Clobbering is when a
+			global variable is used to store a configuration object. In the DOM,
+			global variables are stored on the <code>window</code> object - which you
+			already clobbered in <a href="./starting-island.html">challenge #1</a> -
+			so you need to clobber using a similar approach.
+		</p>
+		<p>
+			However, in this scenario you need to clobber a specific configuration
+			field, not just a property on the <code>window</code>  object. In
+			particular, you need to get the vulnerable script to load a script
+			named <code>malicious.js</code>.
+		</p>
+		<p>
+			<details>
+				<summary>HINT:</summary>
+				Which HTML element has a <code>href</code> attribute?
+			</details>
 		</p>
 	</div>
 

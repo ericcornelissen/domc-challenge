@@ -14,7 +14,7 @@ const value = process.argv[3];
 
 function enc(key, value) {
 	const k = [], c = [];
-	for (let i = 0; i < Math.max(key.length, value.length); i++) {
+	for (let i = 0; i < value.length; i++) {
 		k.push(key.charCodeAt(i % key.length));
 		c.push(key.charCodeAt(i % key.length) ^ value.charCodeAt(i % value.length));
 	}

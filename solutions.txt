@@ -2,3 +2,5 @@
 2. <img name=domc>
 3. <input name=domc>
 4. <input form=login name=domc>
+5. <a id=config href=malicious.js>
+6. <img name=config><img name=config id=helperScript src=malicious.js>

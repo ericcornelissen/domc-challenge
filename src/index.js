@@ -3,9 +3,8 @@ initializeContinue();
 // ---
 
 function initializeContinue() {
-	const challengeCount = 5;
 	const solved = [];
-	for (let i = 1; i <= challengeCount; i++) {
+	for (let i = 1; ; i++) {
 		const solution = localStorage.getItem(`challenge-${i}`);
 		if (solution) {
 			solved.push([i, JSON.parse(solution)]);
