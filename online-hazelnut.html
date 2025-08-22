@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<link href="./styles.css" rel="stylesheet" type="text/css">
+	<script src="./shared.js"></script>
+</head>
+
+<body>
+	<noscript>
+		<b>These challenges require JavaScript to be enabled to complete.</b>
+	</noscript>
+
+	<div>
+		<p>
+			<a href="./index.html">home</a>
+			-
+			<a href="./authorized-forest.html">previous</a>
+		</p>
+		<h1>
+			DOM Clobbering Challenge #6
+		</h1>
+		<p>
+			<b>Your goal:</b>
+			Get the site to load a new script named <code>malicious.js</code>, again.
+		</p>
+		<p>
+			Sometimes the field on the configuration object is nested. Exploiting this
+			requires a new DOM Clobbering technique which involves
+			<code>HTMLCollection</code>s. In particular, if you use multiple elements
+			to clobber and those element share a <code>name</code> or <code>id</code>
+			then the clobbered value will be a <code>HTMLCollection</code>. And, you
+			guessed it, a <code>HTMLCollection</code> can itself be clobbered too!
+		</p>
+		<p>
+			In this challenge, you must use this technique to get the vulnerable
+			script to load a script named <code>malicious.js</code>.
+		</p>
+		<p>
+			<details>
+				<summary>HINT:</summary>
+				Which HTML element has a <code>src</code> attribute?
+			</details>
+		</p>
+		<p>
+			NOTE: This challenge has multiple similar solutions, not all of which work
+			in every browsers! This challenge includes some logs that can help you
+			debug such issues.
+		</p>
+	</div>
+
+	<div id="solved"></div>
+
+	<hr>
+
+	<div>
+		<form>
+			<label for="input">Your input:</label>
+			<br>
+			<textarea id="input" name="input"></textarea>
+			<br>
+			<input id="submit" type="submit" value="Submit">
+		</form>
+
+		<pre id="preview"></pre>
+	</div>
+
+	<div id="container" class="hidden"></div>
+
+	<script src="./online-hazelnut.js"></script>
+</body>
+
+</html>

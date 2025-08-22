@@ -1,0 +1,30 @@
+html {
+	min-width: 480px;
+	width: 100%;
+}
+
+body {
+	font-family: "Fira Sans", sans-serif;
+	max-width: 1040px;
+	margin: 0 auto;
+}
+
+p { color: #000 }
+code { color: #555 }
+
+textarea {
+	width: 480px;
+	height: 4rem;
+}
+
+.text-normal, p { font-size: 1rem; }
+.text-medium { font-size: 1.3rem; }
+.text-large { font-size: 2rem; }
+.text-center {
+	text-align: center;
+	width: 100%;
+}
+
+.hidden {
+	display: none;
+}
