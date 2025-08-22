@@ -34,12 +34,22 @@ function setupSubmit({ check, id, name }) {
 	const $input = document.getElementById("input");
 	const $submit = document.getElementById("submit");
 
-	$submit.addEventListener("click", event => {
-		event.preventDefault();
-
+	const submit = () => {
 		_loadSolution($input.value);
 		trySolution({ check, id, name });
+	};
+
+	$submit.addEventListener("click", event => {
+		event.preventDefault();
+		submit();
 	});
+
+	$input.addEventListener("keydown", _debounce(event => {
+		if (event.ctrlKey && event.key === "Enter") {
+			event.preventDefault();
+			submit();
+		}
+	}));
 }
 
 let attempt = 0;
