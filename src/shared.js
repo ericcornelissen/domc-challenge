@@ -1,31 +1,28 @@
-function load({ check, id, name, scenario }) {
-	setupSolved({ id, name });
+const messages = {
+	wrong: ["That didn't work...", "Try again...", "No, that wasn't it..."],
+};
 
+function load({ check, id, name, scenario }) {
 	setupInput(id);
 	setupPreview(scenario);
-
-	const secret = check()
-	if (secret) {
-		solved(secret);
-	}
+	setupSubmit({ check, id, name });
+	trySolution({ check, id, name });
 }
 
 function setupInput(id) {
-	const input = _getInput(id);
+	const input = _getStoredInput(id);
 	if (input) {
-		const $container = document.getElementById("container");
-		$container.innerHTML = input;
-
-		const $input = document.getElementById("input");
-		$input.value = input;
+		_loadInput(input);
+		_loadSolution(input);
 	}
 }
 
 function setupPreview(template) {
-	const $input = document.getElementById("input"), $preview = document.getElementById("preview");
+	const $input = document.getElementById("input");
+	const $preview = document.getElementById("preview");
 
 	const update = () => {
-		const value = $input.value || "<!-- your input will go here -->"
+		const value = $input.value.trim() || "<!-- your input will go here -->"
 		$preview.innerText = template.replace("%s", value);
 	};
 
@@ -33,16 +30,40 @@ function setupPreview(template) {
 	$input.addEventListener("keydown", _debounce(update));
 }
 
-function setupSolved({ id, name }) {
+function setupSubmit({ check, id, name }) {
+	const $input = document.getElementById("input");
+	const $submit = document.getElementById("submit");
+
+	$submit.addEventListener("click", event => {
+		event.preventDefault();
+
+		_loadSolution($input.value);
+		trySolution({ check, id, name });
+	});
+}
+
+let attempt = 0;
+function trySolution({ check, id, name }) {
+	const $input = document.getElementById("input");
+	if ($input.value.trim() === "") {
+		return;
+	}
+
 	const $solved = document.getElementById("solved");
-	globalThis.solved = (secret) => {
+
+	attempt = (attempt + 1) % messages.wrong.length;
+
+	const secret = check();
+	if (secret) {
 		localStorage.setItem(`challenge-${id}`, JSON.stringify({
 			id, name, secret,
-			input: _getInput(id),
+			input: $input.value,
 		}));
 
 		$solved.innerHTML = `<hr><p><b>Success!</b> The key for the next challenge is <a href="./${secret}.html">${secret}</a>.</p>`;
-	};
+	} else {
+		$solved.innerHTML = `<hr><p>${messages.wrong[attempt]}</p>`;
+	}
 }
 
 // ---
@@ -55,22 +76,22 @@ function _debounce(fn) {
 	};
 }
 
-function _getInput(id) {
-	return _getInputFromUrl() || _getInputFromStorage(id) || "";
-}
-
-function _getInputFromUrl() {
-	try {
-		const { search } = new URL(document.URL);
-		const params = new URLSearchParams(search);
-		return params.get("input");
-	} catch { }
-}
-
-function _getInputFromStorage(id) {
+function _getStoredInput(id) {
 	try {
 		const raw = localStorage.getItem(`challenge-${id}`);
 		const solution = JSON.parse(raw);
 		return solution.input;
-	} catch { }
+	} catch {
+		return null;
+	}
+}
+
+function _loadInput(input) {
+	const $input = document.getElementById("input");
+	$input.value = input;
+}
+
+function _loadSolution(markup) {
+	const $container = document.getElementById("container");
+	$container.innerHTML = markup;
 }
