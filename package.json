@@ -1,7 +1,9 @@
 {
+  "name": "domc-challenges",
   "private": true,
-	"type": "module",
+  "type": "module",
   "devDependencies": {
+    "@tanstack/highlight": "0.0.10",
     "javascript-obfuscator": "4.1.1"
   }
 }

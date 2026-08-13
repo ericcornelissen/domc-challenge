@@ -1,3 +1,5 @@
+import { load } from "./shared.js";
+
 function check() {
 	if (window.config) {
 		const p1 = window.config.id;

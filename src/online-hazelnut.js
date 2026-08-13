@@ -1,3 +1,5 @@
+import { load } from "./shared.js";
+
 function check() {
 	if (window.config) {
 		console.info(window.config);

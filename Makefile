@@ -3,7 +3,7 @@
 SRC  := $(wildcard src/*)
 DIST := $(patsubst src/%,dist/%,$(SRC))
 
-all: $(DIST)
+all: $(DIST) dist/highlight
 
 clean:
 	@git clean -fx \
@@ -28,6 +28,10 @@ dist/%.html: src/%.html | dist
 
 dist/%.js: src/%.js | node_modules dist
 	@npx javascript-obfuscator '$<' --output '$@' | grep -v '^$$'
+
+dist/highlight: | node_modules dist
+	@cp -r node_modules/@tanstack/highlight/dist dist/highlight
+	@find dist/highlight -name '*.ts' -delete
 
 node_modules: package-lock.json
 	@npm clean-install

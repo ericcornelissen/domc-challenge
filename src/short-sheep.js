@@ -1,3 +1,5 @@
+import { load } from "./shared.js";
+
 function check() {
 	const $form = document.querySelector("form[id='login']");
 	if ($form.domc) {

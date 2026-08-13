@@ -1,3 +1,5 @@
+import { load } from "./shared.js";
+
 function check() {
 	const $form = document.getElementById("container");
 	if ($form.domc) {

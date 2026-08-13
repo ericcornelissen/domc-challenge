@@ -1,3 +1,5 @@
+import { load } from "./shared.js";
+
 function check() {
 	if (window.domc) {
 		const s = window.domc.id || window.domc.name;

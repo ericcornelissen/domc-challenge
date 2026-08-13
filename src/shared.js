@@ -1,12 +1,26 @@
+import { html } from "./highlight/languages/html.js";
+import { githubLightTheme } from "./highlight/themes/github-light.js";
+import { createHighlighter } from "./highlight/core.js";
+import { createThemeCss } from "./highlight/theme.js";
+
+const highlighter = createHighlighter({ languages: [html] });
+
 const messages = {
 	wrong: ["That didn't work...", "Try again...", "No, that wasn't it..."],
 };
 
-function load({ check, id, name, scenario }) {
+export function load({ check, id, name, scenario }) {
+	setupHighlighting();
 	setupInput(id);
 	setupPreview(scenario);
 	setupSubmit({ check, id, name });
 	trySolution({ check, id, name });
+}
+
+function setupHighlighting() {
+	const style = document.createElement("style");
+	style.textContent = createThemeCss({ light: githubLightTheme });
+	document.head.append(style);
 }
 
 function setupInput(id) {
@@ -22,8 +36,10 @@ function setupPreview(template) {
 	const $preview = document.getElementById("preview");
 
 	const update = () => {
-		const value = $input.value.trim() || "<!-- your input will go here -->"
-		$preview.innerText = template.replace("%s", value);
+		const value = $input.value.trim() || "<!-- your input will go here -->";
+		const raw = template.replace("%s", value);
+		const markup = highlighter.highlight(raw, { lang: "html" });
+		$preview.innerHTML = markup.html;
 	};
 
 	update();
