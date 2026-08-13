@@ -1,0 +1,105 @@
+export const themeTokenClasses = [
+    'token',
+    'attr',
+    'code-inline',
+    'command',
+    'comment',
+    'deleted',
+    'function',
+    'heading',
+    'inserted',
+    'keyword',
+    'link',
+    'literal',
+    'meta',
+    'number',
+    'operator',
+    'property',
+    'selector',
+    'string',
+    'tag',
+    'type',
+    'variable',
+];
+export function createThemeCss(options) {
+    const themeEntries = options.themes || [
+        ...(options.light
+            ? [
+                {
+                    selector: options.lightSelector || ':root',
+                    theme: options.light,
+                },
+            ]
+            : []),
+        ...(options.dark
+            ? [
+                {
+                    selector: options.darkSelector || '.dark',
+                    theme: options.dark,
+                },
+            ]
+            : []),
+    ];
+    const themeCss = themeEntries
+        .map(({ selector, theme }) => createThemeRule(selector, theme))
+        .join('\n\n');
+    if (options.includeBaseStyles === false) {
+        return themeCss;
+    }
+    return `${themeCss}\n\n${createThemeBaseCss(options)}`;
+}
+export function createThemeRule(selector, theme) {
+    const variables = [
+        `  --th-background: ${theme.background};`,
+        `  --th-token: ${theme.tokens.token || theme.foreground};`,
+        ...themeTokenClasses
+            .filter((className) => className !== 'token')
+            .map((className) => `  --th-${className}: ${theme.tokens[className]};`),
+    ];
+    return `${selector} {
+${variables.join('\n')}
+}`;
+}
+export function createThemeBaseCss(options = {}) {
+    const codeBlockSelector = options.codeBlockSelector || 'pre.th-code';
+    const lineNumbersSelector = options.lineNumbersSelector || '.th-code--line-numbers';
+    return `${codeBlockSelector} {
+  overflow-x: auto;
+  padding: 1rem;
+  background: var(--th-background);
+  color: var(--th-token);
+}
+
+.th-token { color: var(--th-token); }
+.th-keyword { color: var(--th-keyword); }
+.th-string { color: var(--th-string); }
+.th-comment { color: var(--th-comment); }
+.th-function { color: var(--th-function); }
+.th-type { color: var(--th-type); }
+.th-property { color: var(--th-property); }
+.th-tag { color: var(--th-tag); }
+.th-attr { color: var(--th-attr); }
+.th-literal { color: var(--th-literal); }
+.th-number { color: var(--th-number); }
+.th-variable { color: var(--th-variable); }
+.th-operator { color: var(--th-operator); }
+.th-inserted { color: var(--th-inserted); }
+.th-deleted { color: var(--th-deleted); }
+.th-meta { color: var(--th-meta); }
+.th-heading { color: var(--th-heading); }
+.th-link { color: var(--th-link); }
+.th-code-inline { color: var(--th-code-inline); }
+.th-selector { color: var(--th-selector); }
+.th-command { color: var(--th-command); }
+.th-line { display: inline-block; min-width: 100%; width: max-content; }
+${lineNumbersSelector} code { counter-reset: th-line; }
+${lineNumbersSelector} .th-line::before {
+  display: inline-block;
+  width: 2.5em;
+  padding-right: 1em;
+  color: var(--th-comment);
+  content: attr(data-line);
+  text-align: right;
+  user-select: none;
+}`;
+}
